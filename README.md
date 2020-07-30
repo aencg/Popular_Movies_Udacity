@@ -1,6 +1,6 @@
 # Popular Movies, Stage 2
 
-Udacity - Android Developer Nanodegree - Projects: Popular Movies, Stage 2
+## Udacity - Android Developer Nanodegree - Projects: Popular Movies, Stage 2
 
 Built a UI that presented the user with a grid of movie posters, allowed users to change sort order, and presented a screen with additional information on the movie selected by the user
 
