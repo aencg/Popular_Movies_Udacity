@@ -44,8 +44,9 @@ Built a UI that presented the user with a grid of movie posters, allowed users t
 - If Room is used, database is not re-queried unnecessarily. LiveData is used to observe changes in the database and update the UI accordingly.
 
 - If Room is used, database is not re-queried unnecessarily after rotation. Cached LiveData from ViewModel is used instead.
+<p float="left">
+<img width="260" alt="screenshot" src="https://raw.githubusercontent.com/aencg/.github/master/popular_movies_images/popular%20movies1.png?token=ANISTK3NHWONP2VHXEW44327EKBC6">
 
-<img  alt="rename_screenshot" src="popular_movies_images/popular movies1.png">
-
-<img width="1039" alt="rename_screenshot" src="https://raw.githubusercontent.com/aencg/.github/master/Sin%20t%C3%ADtulo.jpg?token=ANISTK7QCRCUHDHZGNS2VR27EJ5DO">
+<img width="260" alt="screenshot2" src="https://raw.githubusercontent.com/aencg/.github/master/popular_movies_images/popular%20movies2.png?token=ANISTK2BNTSNR4NHOLYGLZK7EKBPO">
+</p>
  
