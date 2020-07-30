@@ -4,6 +4,11 @@ Udacity - Android Developer Nanodegree - Projects: Popular Movies, Stage 2
 
 Built a UI that presented the user with a grid of movie posters, allowed users to change sort order, and presented a screen with additional information on the movie selected by the user
 
+<p float="left">
+<img raw="true" width="240" alt="screenshot" src="https://github.com/aencg/.github/blob/master/popular_movies_images/popular%20movies1.png?raw=true"> 
+<img raw="true"  width="240"  alt="screenshot2" src="https://github.com/aencg/.github/blob/master/popular_movies_images/popular%20movies2.png?raw=true"> 
+ </p>
+
 # Project Specifications
 ## User Interface - Layout 
 
@@ -44,8 +49,5 @@ Built a UI that presented the user with a grid of movie posters, allowed users t
 - If Room is used, database is not re-queried unnecessarily. LiveData is used to observe changes in the database and update the UI accordingly.
 
 - If Room is used, database is not re-queried unnecessarily after rotation. Cached LiveData from ViewModel is used instead. 
-<p float="left">
-<img raw="true" width="240" alt="screenshot" src="https://github.com/aencg/.github/blob/master/popular_movies_images/popular%20movies1.png?raw=true"> 
-<img raw="true"  width="240"  alt="screenshot2" src="https://github.com/aencg/.github/blob/master/popular_movies_images/popular%20movies2.png?raw=true"> 
- </p>
+
  
