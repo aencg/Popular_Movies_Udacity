@@ -47,5 +47,5 @@ Built a UI that presented the user with a grid of movie posters, allowed users t
 
 <img width="1039" alt="rename_screenshot" src="https://user-images.githubusercontent.com/18093541/63129466-956cc580-bf85-11e9-92d8-b028dd483fa5.png">
 
-<img width="1039" alt="rename_screenshot" src="https://raw.githubusercontent.com/aencg/.github/master/Sin%20t%C3%ADtulo.jpg">
+<img width="1039" alt="rename_screenshot" src="https://raw.githubusercontent.com/aencg/.github/master/Sin%20t%C3%ADtulo.jpg?token=ANISTK7QCRCUHDHZGNS2VR27EJ5DO">
  
