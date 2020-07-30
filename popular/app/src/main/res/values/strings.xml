@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">PopularMovies</string>
+    <string name="error_message">Sorry. We can\'t show any data.</string>
+    <string name="detail_label">MovieDetail</string>
+    <string name="trailer_label">Trailer</string>
+    <string name="trailers_label">Trailers</string>
+    <string name="reviews_label">Reviews</string>
+
+
+    <string name="no_favs">There is not favorite movies.</string>
+
+    <string name="popular">Popular</string>
+    <string name="rated">Rated</string>
+    <string name="favorites">Favorites</string>
+    <string name="mark_favorites">Mark as Favorite</string>
+    <string name="unmark_favorites">Unmark as Favorite</string>
+
+    <string name="shared_pref">popular_movies_shared</string>
+    <string name="order_by_key_prefs">order_by_key_prefs</string>
+</resources>
