@@ -4,8 +4,8 @@ Udacity - Android Developer Nanodegree - Projects: Popular Movies, Stage 2
 
 Built a UI that presented the user with a grid of movie posters, allowed users to change sort order, and presented a screen with additional information on the movie selected by the user
 
-#Project Specifications
-##User Interface - Layout 
+# Project Specifications
+## User Interface - Layout 
 
 - UI contains an element (e.g., a spinner or settings menu) to toggle the sort order of the movies by: most popular, highest rated.
 
@@ -16,7 +16,7 @@ Built a UI that presented the user with a grid of movie posters, allowed users t
 - Movie Details layout contains title, release date, movie poster, vote average, and plot synopsis.
 
 - Movie Details layout contains a section for displaying trailer videos and user reviews.e file.
-##User Interface - Function
+## User Interface - Function
 
 - When a user changes the sort criteria (most popular, highest rated, and favorites) the main view gets updated correctly.
 
@@ -26,7 +26,7 @@ Built a UI that presented the user with a grid of movie posters, allowed users t
 
 - In the movies detail screen, a user can tap a button (for example, a star) to mark it as a Favorite. Tap the button on a favorite movie will unfavorite it.
 
-##Network API Implementation
+## Network API Implementation
 
 - In a background thread, app queries the /movie/popular or /movie/top_rated API for the sort criteria specified in the settings menu.
 
@@ -46,4 +46,6 @@ Built a UI that presented the user with a grid of movie posters, allowed users t
 - If Room is used, database is not re-queried unnecessarily after rotation. Cached LiveData from ViewModel is used instead.
 
 <img width="1039" alt="rename_screenshot" src="https://user-images.githubusercontent.com/18093541/63129466-956cc580-bf85-11e9-92d8-b028dd483fa5.png">
+
+<img width="1039" alt="rename_screenshot" src="https://raw.githubusercontent.com/aencg/.github/master/Sin%20t%C3%ADtulo.jpg">
  
