@@ -1,5 +1,7 @@
 package com.example.popularmovies.data;
 
+import android.content.ContentValues;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -11,6 +13,14 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "movies")
 public class Movie implements Serializable {
+
+    private static final String MOVIE_ID = "MOVIE_ID";
+    private static final String MOVIE_TITLE = "MOVIE_TITLE" ;
+    private static final String MOVIE_RELEASE_DATE = "MOVIE_RELEASE_DATE";
+    private static final String MOVIE_POSTER = "MOVIE_POSTER";
+    private static final String MOVIE_VOTE_AVERAGE = "MOVIE_VOTE_AVERAGE";
+    private static final String MOVIE_SYNOPSIS = "MOVIE_SYNOPSIS";
+
 
     @PrimaryKey @NonNull
     private String id;
@@ -88,6 +98,32 @@ public class Movie implements Serializable {
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+    }
+
+
+
+    public static Movie fromContentValues
+            (ContentValues contentValues) {
+        Movie movie = new Movie();
+        if (contentValues.containsKey(MOVIE_ID)) {
+            movie.setId(contentValues.getAsString(MOVIE_ID));
+        } if (contentValues.containsKey(MOVIE_TITLE)) {
+            movie.setTitle(contentValues.getAsString(MOVIE_TITLE));
+        } if (contentValues.containsKey(MOVIE_RELEASE_DATE)) {
+            movie.setReleaseDate(
+                    contentValues.getAsString(MOVIE_RELEASE_DATE));
+        } if (contentValues.containsKey(MOVIE_POSTER)) {
+            movie.setMoviePoster
+                    (contentValues.getAsString(MOVIE_POSTER));
+        }if (contentValues.containsKey(MOVIE_VOTE_AVERAGE)) {
+            movie.setVoteAverage
+                    (contentValues.getAsString(MOVIE_VOTE_AVERAGE));
+        }
+        if (contentValues.containsKey(MOVIE_SYNOPSIS)) {
+            movie.setSynopsis
+                    (contentValues.getAsString(MOVIE_SYNOPSIS));
+        }
+        return movie;
     }
 
 }
