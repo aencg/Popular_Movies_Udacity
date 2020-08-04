@@ -50,4 +50,7 @@ Built a UI that presented the user with a grid of movie posters, allowed users t
 
 - If Room is used, database is not re-queried unnecessarily after rotation. Cached LiveData from ViewModel is used instead. 
 
- 
+# HOW TO SETUP
+It's necessary to obtain a key from themoviedb.org to successfully run the app. This key should be added to the file apikey.properties in the root of the project.
+The file should look like:
+ MOVIES_KEY="myKeyFromTheMovieDb.org"
