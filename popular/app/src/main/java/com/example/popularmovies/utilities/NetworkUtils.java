@@ -18,6 +18,8 @@ package com.example.popularmovies.utilities;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.popularmovies.BuildConfig;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -51,7 +53,7 @@ public final class NetworkUtils {
     private static final String BASE_YOUTUBE_URL = "https://www.youtube.com/watch";
 
     /****the moviedb api key***/
-    private static final String KEY = " ";
+    private static final String KEY = BuildConfig.MOVIES_KEY;
 
     private static final String PATH_RATED = "top_rated";
     private static final String PATH_POPULAR = "popular";

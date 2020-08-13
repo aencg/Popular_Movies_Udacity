@@ -137,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             mBinding.tvMainFeedback.setVisibility(View.VISIBLE);
             mBinding.tvMainFeedback.setText(getText(R.string.no_favs));
         }
+//        if(mMovies!=null)
+//            Log.e("Favs",mMovies.toString());
         mMovieAdapter.setMovieData(mMovies);
 
 
