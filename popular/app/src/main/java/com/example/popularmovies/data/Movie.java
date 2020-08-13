@@ -3,7 +3,6 @@ package com.example.popularmovies.data;
 import android.content.ContentValues;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -14,12 +13,12 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "movies")
 public class Movie implements Serializable {
 
-    private static final String MOVIE_ID = "MOVIE_ID";
-    private static final String MOVIE_TITLE = "MOVIE_TITLE" ;
-    private static final String MOVIE_RELEASE_DATE = "MOVIE_RELEASE_DATE";
-    private static final String MOVIE_POSTER = "MOVIE_POSTER";
-    private static final String MOVIE_VOTE_AVERAGE = "MOVIE_VOTE_AVERAGE";
-    private static final String MOVIE_SYNOPSIS = "MOVIE_SYNOPSIS";
+    public static final String MOVIE_ID = "id";
+    public static final String MOVIE_TITLE = "title" ;
+    public static final String MOVIE_RELEASE_DATE = "releaseDate";
+    public static final String MOVIE_POSTER = "moviePoster";
+    public static final String MOVIE_VOTE_AVERAGE = "voteAverage";
+    public static final String MOVIE_SYNOPSIS = "synopsis";
 
 
     @PrimaryKey @NonNull

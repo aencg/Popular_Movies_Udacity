@@ -43,7 +43,7 @@ public class MovieContentProvider extends ContentProvider {
                 ID_MOVIE_DATA);
         uriMatcher.addURI(AUTHORITY,
                 MOVIES_TABLE_NAME +
-                        "/*", ID_MOVIE_DATA_ITEM);
+                        "/#", ID_MOVIE_DATA_ITEM);
     }
 
     @Override
