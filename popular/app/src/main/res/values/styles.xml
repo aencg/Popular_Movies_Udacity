@@ -21,11 +21,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+
+
         <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowTransitionBackgroundFadeDuration">500</item>
+<!--        <item name="android:windowTransitionBackgroundFadeDuration">500</item>-->
         <item name="android:windowActivityTransitions">true</item>
-        <item name="android:windowSharedElementEnterTransition">@transition/cheeses_enter</item>
-        <item name="android:windowSharedElementExitTransition">@transition/cheeses_enter</item>
+
+        <item name="android:windowEnterTransition">@transition/explode_fade</item>
+        <item name="android:windowExitTransition">@transition/explode_fade</item>
+
+        <item name="android:windowSharedElementEnterTransition">@transition/share_elements</item>
+        <item name="android:windowSharedElementExitTransition">@transition/share_elements</item>
 
     </style>
 

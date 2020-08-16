@@ -5,8 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.popularmovies.data.Movie;
 import com.example.popularmovies.utilities.NetworkUtils;
 import com.squareup.picasso.Callback;
@@ -15,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.net.URL;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
@@ -68,6 +71,15 @@ public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.MovieAdapte
             public MovieAdapterViewHolder(View view) {
                 super(view);
                 mImageView = (ImageView) view.findViewById(R.id.iv_item_lista) ;
+                mImageView.getViewTreeObserver().addOnPreDrawListener(
+                        new ViewTreeObserver.OnPreDrawListener() {
+                            @Override
+                            public boolean onPreDraw() {
+                                mImageView.getViewTreeObserver().removeOnPreDrawListener(this);
+                                ((AppCompatActivity) mContext).supportStartPostponedEnterTransition();
+                                return true;
+                            }
+                        });
                 view.setOnClickListener(this);
             }
              /**
@@ -118,28 +130,32 @@ public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.MovieAdapte
         @Override
         public void onBindViewHolder(MovieAdapterViewHolder movieAdapterViewHolder, int position) {
             URL posterURL = NetworkUtils.buildUrlPoster(mMovieData.get(position).getMoviePoster());
-            Picasso.get().setLoggingEnabled(true);
-            Picasso.get().load(String.valueOf(posterURL))
-                    .noFade()
-                 //   .noPlaceholder()
-                    .into(movieAdapterViewHolder.mImageView, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            if(mFinCargaListener!=null){
-                                mFinCargaListener.findeCarga();
-                            }
-                            //startPostponedEnterTransition();
-                        }
 
-                        @Override
-                        public void onError(Exception e) {
-                            if(mFinCargaListener!=null){
-                                mFinCargaListener.findeCarga();
-                            }
-                        }
-                    });
+            Glide.with(mContext).load(String.valueOf(posterURL))
+                    .centerCrop()
+                    .into(movieAdapterViewHolder.mImageView);
+//            Picasso.get().setLoggingEnabled(true);
+//            Picasso.get().load(String.valueOf(posterURL))
+//                  //  .noFade()
+//                 //   .noPlaceholder()
+//                    .into(movieAdapterViewHolder.mImageView, new Callback() {
+//                        @Override
+//                        public void onSuccess() {
+//                            if(mFinCargaListener!=null){
+//                                mFinCargaListener.findeCarga();
+//                            }
+//                            //startPostponedEnterTransition();
+//                        }
+//
+//                        @Override
+//                        public void onError(Exception e) {
+//                            if(mFinCargaListener!=null){
+//                                mFinCargaListener.findeCarga();
+//                            }
+//                        }
+//                    });
 
-            movieAdapterViewHolder.mImageView.setTransitionName("cambio"+movieAdapterViewHolder.getAdapterPosition());
+          //  movieAdapterViewHolder.mImageView.setTransitionName("cambio"+movieAdapterViewHolder.getAdapterPosition());
         }
 
         /**

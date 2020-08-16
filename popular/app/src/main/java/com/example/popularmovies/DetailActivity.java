@@ -22,8 +22,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.view.Window;
+import android.widget.LinearLayout.LayoutParams;
 
+import com.bumptech.glide.Glide;
 import com.example.popularmovies.data.AppDatabase;
 import com.example.popularmovies.data.Movie;
 import com.example.popularmovies.data.Review;
@@ -61,10 +62,11 @@ public class DetailActivity extends AppCompatActivity  implements TrailerAdapter
         super.onCreate(savedInstanceState);
 
 
-        supportPostponeEnterTransition();
+     //   supportPostponeEnterTransition();
 
 
         mDetailBinding= DataBindingUtil.setContentView(this,R.layout.activity_detail);
+        getWindow().setAllowEnterTransitionOverlap(true);
         LinearLayoutManager linearLayoutManagerTrailers = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mDetailBinding.recyclerviewTrailers.setLayoutManager(linearLayoutManagerTrailers);
         mDetailBinding.recyclerviewTrailers.setHasFixedSize(true);
@@ -106,31 +108,64 @@ public class DetailActivity extends AppCompatActivity  implements TrailerAdapter
 
             if(intent.hasExtra("position")){
                 Log.e("position", String.valueOf(intent.getIntExtra("position",-1)));
-                mDetailBinding.ivDetail.setTransitionName("cambio"+String.valueOf(intent.getIntExtra("position",-1)));
+            //    mDetailBinding.ivDetail.setTransitionName("cambio"+String.valueOf(intent.getIntExtra("position",-1)));
             }
 
             mDetailBinding.tvTitle.setText(movie.getTitle());
             mDetailBinding.tvVoteAverage.setText(movie.getVoteAverage() + "/10");
             mDetailBinding.tvReleaseDate.setText(movie.getReleaseDate().substring(0, 4));
             mDetailBinding.tvSynopsis.setText(movie.getSynopsis());
-            URL posterURL = NetworkUtils.buildUrlPoster(movie.getMoviePoster());
-            Picasso.get().setLoggingEnabled(true);
-            Picasso.get().load(String.valueOf(posterURL))
-                    .noFade()
-                    .noPlaceholder()
-                    .into(mDetailBinding.ivDetail, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            scheduleStartPostponedTransition(mDetailBinding.ivDetail);
-                        }
 
+
+
+
+            supportPostponeEnterTransition();
+            mDetailBinding.ivDetail.getViewTreeObserver().addOnPreDrawListener(
+                    new ViewTreeObserver.OnPreDrawListener() {
                         @Override
-                        public void onError(Exception e) {
+                        public boolean onPreDraw() {
+                            mDetailBinding.ivDetail.getViewTreeObserver().removeOnPreDrawListener(this);
                             supportStartPostponedEnterTransition();
+                            return true;
                         }
-                    });
+                    }
+            );
+
+            if(intent.hasExtra("w") && intent.hasExtra("h")){
+                int width = intent.getIntExtra("w",320);
+                int height = intent.getIntExtra("h",320);
+                mDetailBinding.ivDetail.setLayoutParams(new LayoutParams(width, height));
+            }
+            mDetailBinding.ivDetail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("click2","width:"+v.getWidth()+" height:"+v.getHeight());
+                }
+            });
+
+
+
+            URL posterURL = NetworkUtils.buildUrlPoster(movie.getMoviePoster());
+            Glide.with(this).load(String.valueOf(posterURL))
+                    .centerCrop()
+                    .into(mDetailBinding.ivDetail);
+//            Picasso.get().setLoggingEnabled(true);
+//            Picasso.get().load(String.valueOf(posterURL))
+//                    .noFade()
+//                    .noPlaceholder()
+//                    .into(mDetailBinding.ivDetail, new Callback() {
+//                        @Override
+//                        public void onSuccess() {
+//                       //     scheduleStartPostponedTransition(mDetailBinding.ivDetail);
+//                        }
+//
+//                        @Override
+//                        public void onError(Exception e) {
+//                           // supportStartPostponedEnterTransition();
+//                        }
+//                    });
         }   else{
-            supportStartPostponedEnterTransition();
+         //   supportStartPostponedEnterTransition();
         }
 
 
@@ -179,7 +214,7 @@ public class DetailActivity extends AppCompatActivity  implements TrailerAdapter
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                supportFinishAfterTransition();
                 return true;
         }
         return super.onOptionsItemSelected(item);

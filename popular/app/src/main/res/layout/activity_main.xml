@@ -8,15 +8,11 @@
         android:background="@android:color/black" >
 
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 />
-        </ScrollView>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

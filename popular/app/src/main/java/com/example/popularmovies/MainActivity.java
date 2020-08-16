@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             //    startPostponedEnterTransition();
             }
         });
-
+        supportPostponeEnterTransition();
         mBinding.recyclerview.setAdapter(mMovieAdapter);
         setupViewModel();
         loadMovies(mMode);
@@ -172,26 +172,15 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("movie",movieClicked);
         intent.putExtra("position",mMovies.indexOf(movieClicked));
+        intent.putExtra("w",view.getWidth());
+        intent.putExtra("h",view.getHeight());
+        Log.e("click","width:"+view.getWidth()+" height:"+view.getHeight());
 
-        Log.e("transition name", view.getTransitionName());
+        ActivityOptions options = ActivityOptions
+                .makeSceneTransitionAnimation(this, view, view.getTransitionName());
+        // start the new activity
+        startActivity(intent, options.toBundle());
 
-      /*  funciona con explosion
-      startActivity(intent,
-                makeSceneTransitionAnimation(this).toBundle()); //*/
-
-
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        float dpHeight = view.getWidth() / displayMetrics.density;
-        float dpWidth = view.getHeight() / displayMetrics.density;
-//Log.e("tamaño",(view.getWidth()*view.getScaleY())+"w "+(view.getHeight()*view.getScaleY())+"h");
-        Log.e("tamaño",dpWidth+"w "+dpHeight+"h");
-        ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation(this,   view, view.getTransitionName());
-        startActivity(intent, options.toBundle());      //*/
-
-//        ActivityOptionsCompat options =
-//                ActivityOptionsCompat.makeCustomAnimation(this, R.anim.slide_up, R.anim.slide_down);
-       // startActivity(intent, options.toBundle());
     }
 
     @Override
