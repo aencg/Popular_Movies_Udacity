@@ -18,4 +18,13 @@
     <string name="shared_pref">popular_movies_shared</string>
     <string name="order_by_key_prefs">order_by_key_prefs</string>
     <string name="poster_transition">poster_transition</string>
+    <string name="notif">Notif</string>
+
+
+    <string name="main_notification_channel_name">Primary</string>
+    <string name="mostPopular">Most Popular:</string>
+    <string name="update_popular">Most popular</string>
+    <string name="short_by">Short by</string>
+    <string name="check_by">Check by</string>
+    <string name="receive_notifications">Receive notifications</string>
 </resources>

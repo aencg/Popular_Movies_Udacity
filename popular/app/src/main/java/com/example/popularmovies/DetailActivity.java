@@ -131,39 +131,12 @@ public class DetailActivity extends AppCompatActivity  implements TrailerAdapter
                     }
             );
 
-            if(intent.hasExtra("w") && intent.hasExtra("h")){
-                int width = intent.getIntExtra("w",320);
-                int height = intent.getIntExtra("h",320);
-                mDetailBinding.ivDetail.setLayoutParams(new LayoutParams(width, height));
-            }
-            mDetailBinding.ivDetail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("click2","width:"+v.getWidth()+" height:"+v.getHeight());
-                }
-            });
-
-
 
             URL posterURL = NetworkUtils.buildUrlPoster(movie.getMoviePoster());
             Glide.with(this).load(String.valueOf(posterURL))
                     .centerCrop()
                     .into(mDetailBinding.ivDetail);
-//            Picasso.get().setLoggingEnabled(true);
-//            Picasso.get().load(String.valueOf(posterURL))
-//                    .noFade()
-//                    .noPlaceholder()
-//                    .into(mDetailBinding.ivDetail, new Callback() {
-//                        @Override
-//                        public void onSuccess() {
-//                       //     scheduleStartPostponedTransition(mDetailBinding.ivDetail);
-//                        }
-//
-//                        @Override
-//                        public void onError(Exception e) {
-//                           // supportStartPostponedEnterTransition();
-//                        }
-//                    });
+
         }   else{
          //   supportStartPostponedEnterTransition();
         }

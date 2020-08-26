@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/action_menu_popular"
-        android:title="@string/popular"
-        app:showAsAction="collapseActionView"
-    />
-    <item android:id="@+id/action_menu_rated"
-        android:title="@string/rated"
+    <item android:title="@string/check_by"     app:showAsAction="collapseActionView">
+        <menu>
+            <group android:checkableBehavior="single"
+                >
+                <item android:id="@+id/action_menu_popular"
+                    android:title="@string/popular"
+                    app:showAsAction="collapseActionView"
+                    />
+                <item android:id="@+id/action_menu_rated"
+                    android:title="@string/rated"
+                    app:showAsAction="collapseActionView"
+                    />
+                <item android:id="@+id/action_menu_fav"
+                    android:title="@string/favorites"
+                    app:showAsAction="collapseActionView"
+                    />
+            </group>
+        </menu>
+
+    </item>
+
+
+
+
+    <group android:checkableBehavior="all"
+        >
+    <item android:id="@+id/action_receive_notifications"
+        android:title="@string/receive_notifications"
         app:showAsAction="collapseActionView"
         />
-    <item android:id="@+id/action_menu_fav"
-        android:title="@string/favorites"
-        app:showAsAction="collapseActionView"
-        />
+    </group>
+
 </menu>

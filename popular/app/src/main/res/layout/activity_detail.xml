@@ -38,8 +38,8 @@
 
         <ImageView
             android:id="@+id/ivDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="160dp"
             android:padding="16dp"
             android:transitionName="@string/poster_transition"
             android:scaleType="centerCrop"/>

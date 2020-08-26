@@ -24,6 +24,8 @@ import com.example.popularmovies.data.Movie;
 import com.example.popularmovies.databinding.ActivityMainBinding;
 import com.example.popularmovies.utilities.JSONMovies;
 import com.example.popularmovies.utilities.NetworkUtils;
+import com.example.popularmovies.utilities.NotificationUtilities;
+import com.example.popularmovies.utilities.ScheduleUtilities;
 
 import java.net.URL;
 import java.util.List;
@@ -45,6 +47,7 @@ import static androidx.core.app.ActivityOptionsCompat.makeSceneTransitionAnimati
 
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler,
         LoaderManager.LoaderCallbacks<List<Movie>> {
+    private static final String SHARED_PREF_NOTIFICATIONS = "shared_pref_notifications";
     ActivityMainBinding mBinding;
 
     List<Movie> mMovies;
@@ -67,11 +70,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mBinding= DataBindingUtil.setContentView(this,R.layout.activity_main );
 
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_pref), Context.MODE_PRIVATE);
-        if(sharedPreferences.contains(getString(R.string.order_by_key_prefs))){
             mMode = sharedPreferences.getInt(getString(R.string.order_by_key_prefs),RATINGS_MODE);
-        }   else{
-            mMode = RATINGS_MODE;
-        }
+
 
         int spanCount;
         Configuration config = getResources().getConfiguration();
@@ -102,6 +102,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mBinding.recyclerview.setAdapter(mMovieAdapter);
         setupViewModel();
         loadMovies(mMode);
+
+        if(sharedPreferences.getBoolean(SHARED_PREF_NOTIFICATIONS,false)){
+            ScheduleUtilities.scheduleChargingReminder(this);
+        }
 
       //  startPostponedEnterTransition();
     }
@@ -137,8 +141,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             mBinding.tvMainFeedback.setVisibility(View.VISIBLE);
             mBinding.tvMainFeedback.setText(getText(R.string.no_favs));
         }
-//        if(mMovies!=null)
-//            Log.e("Favs",mMovies.toString());
         mMovieAdapter.setMovieData(mMovies);
 
 
@@ -172,15 +174,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("movie",movieClicked);
         intent.putExtra("position",mMovies.indexOf(movieClicked));
-        intent.putExtra("w",view.getWidth());
-        intent.putExtra("h",view.getHeight());
-        Log.e("click","width:"+view.getWidth()+" height:"+view.getHeight());
 
-        ActivityOptions options = ActivityOptions
-                .makeSceneTransitionAnimation(this, view, view.getTransitionName());
-        // start the new activity
-        startActivity(intent, options.toBundle());
-
+//        ActivityOptions options = ActivityOptions
+//                .makeSceneTransitionAnimation(this, view, view.getTransitionName());
+//        // start the new activity
+//        startActivity(intent, options.toBundle());
+        startActivity(intent);
     }
 
     @Override
@@ -269,6 +268,25 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        switch (mMode) {
+            case FAVORITE_MODE:
+                menu.findItem(R.id.action_menu_fav).setChecked(true);
+                break;
+            case RATINGS_MODE:
+                menu.findItem(R.id.action_menu_rated).setChecked(true);
+                break;
+            case POPULAR_MODE:
+                menu.findItem(R.id.action_menu_popular).setChecked(true);
+                break;
+            case R.id.action_receive_notifications:
+                SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_pref), Context.MODE_PRIVATE);
+                boolean notify = sharedPreferences.getBoolean(SHARED_PREF_NOTIFICATIONS,false);
+                menu.findItem(R.id.action_receive_notifications).setChecked(notify);
+                break;
+        }
+
+
+
         return true;
     }
 
@@ -279,16 +297,35 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         boolean known = false;
         switch (itemId) {
             case R.id.action_menu_fav:
+                item.setChecked(true);
                 saveMode(FAVORITE_MODE);
                 loadUIinFavMode();
                 return true;
             case R.id.action_menu_rated:
+                item.setChecked(true);
                 saveMode(RATINGS_MODE);
                 known = true;
                 break;
             case R.id.action_menu_popular:
+                item.setChecked(true);
                 saveMode(POPULAR_MODE);
                 known = true;
+                break;
+            case R.id.action_receive_notifications:
+                SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_pref), Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+
+                boolean notify = sharedPreferences.getBoolean(SHARED_PREF_NOTIFICATIONS,false);
+                notify = !notify;
+
+                edit.putBoolean(SHARED_PREF_NOTIFICATIONS,notify);
+                edit.apply();
+                item.setChecked(notify);
+                if(notify){
+                    ScheduleUtilities.scheduleChargingReminder(this);
+                }   else{
+                    ScheduleUtilities.cancelService(getApplicationContext());
+                }
                 break;
         }
         if(known){
